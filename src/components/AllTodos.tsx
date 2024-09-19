@@ -1,40 +1,46 @@
 import { useEffect, useState } from "react";
 import { selectTodos } from "../store/todoSlice";
-import Todo from "./Elements/Todo";
+import Todo from "./Todo";
 import { useSelector } from "react-redux";
+import Filter from "./Filter";
+
+const filterValues = ["All", "Completed", "Active", "Deleted"];
 
 function AllTodos() {
   const todos = useSelector(selectTodos);
   const [todosLength, setTodosLength] = useState(todos.length);
-
+  const [active, setActive] = useState("All");
+  const handleState = (state: string) => {
+    setActive(state);
+  };
   useEffect(() => {
     setTodosLength(todos.length);
   }, [todos]);
 
-  type Todo = {
-    id: string;
-    text: string;
-    username: string;
-    status: "Active" | "Completed" | "Deleted";
-  };
   return (
-    <div className="max-w-1152 mx-auto ">
-      <p className="text-black font-poppins font-semibold text-xl mb-3">
-        All Todos ({todosLength})
-      </p>
+    <div className=" max-w-1152 mx-auto ">
+      <div className="flex justify-between">
+        <p className="text-black font-poppins font-semibold text-xl mb-3 ">
+          All Todos ({todosLength})
+        </p>
+        <Filter
+          handleState={handleState}
+          currentState={active}
+          states={filterValues}
+        />
+      </div>
       {/* TODOS LIST */}
-      <div className=" gap-5 border-x border-t border-[#DDDDDD] rounded-b-[5px] rounded-t-[5px]">
-        {todos.map((todo: Todo, i) => (
-          <Todo
-            key={todo.id}
-            status={todo.status}
-            text={todo.text}
-            username={todo.username}
-            id={todo.id} // for passing to Actions so they can change their own colors
-            index={i} // for alternating avatar colors
-            todosLength={todos.length} // for perfect rounded edges of Todo List
-          />
-        ))}
+      <div
+        className={`gap-5 border-x ${
+          todos.length ? "border-t" : ""
+        } border-[#DDDDDD] rounded-b-[5px] rounded-t-[5px]`}
+      >
+        <Todo
+          todos={todos.filter((todo) => {
+            if (active === "All") return todo;
+            return todo.status === active;
+          })}
+        />
       </div>
     </div>
   );
