@@ -34,7 +34,7 @@ const Time: React.FC = () => {
   }, []);
 
   return (
-    <div className="text-right w-[160px]">
+    <div className="text-right w-[160px] hidden md:inline">
       <div className="text-2xl font-medium text-customBlue font-poppins">
         {currentTime}
       </div>

@@ -17,7 +17,7 @@ const Input = ({
 }: Props) => {
   return (
     <input
-      className={`outline-none border border-[#DDDDDD] h-11 rounded-md p-[10px] text-base text-[#8E8E8E] font-poppins focus:shadow-md ${className}`}
+      className={`outline-none border border-[#DDDDDD] h-11 rounded-md p-[10px] text-base text-[#8E8E8E] font-poppins focus:shadow-md w-full md:w-[371px] md:mr-5 mb-5 md:mb-0 ${className}`}
       placeholder={placeholder}
       value={value}
       onChange={onChange}

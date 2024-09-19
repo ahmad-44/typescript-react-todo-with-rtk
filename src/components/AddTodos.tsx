@@ -6,10 +6,8 @@ import { addTodo } from "../store/todoSlice";
 function AddTodos() {
   const [username, setUsername] = useState<string>("");
   const [task, setTask] = useState<string>("");
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [status, setStatus] = useState<"Active" | "Completed" | "Deleted">(
-    "Active"
-  );
+
+  const [status] = useState<"Active" | "Completed" | "Deleted">("Active");
   const dispatch = useDispatch();
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
@@ -32,23 +30,23 @@ function AddTodos() {
     <>
       <form
         onSubmit={submitHandler}
-        className="flex items-center max-w-1152 mx-auto font-poppins mb-10"
+        className="flex flex-col md:flex-row items-center max-w-1152 mx-auto font-poppins mb-10 max-[1152px]:px-[10px]"
       >
         <Input
-          className={"w-[371px] mr-5"}
+          className={"md:w-[371px] "}
           placeholder={"User Name"}
           value={username}
           onChange={handleUsernameChange}
           required
         />
         <Input
-          className={"w-[663px] mr-5"}
+          className={"md:w-[663px]"}
           placeholder={"Task"}
           value={task}
           onChange={handleTaskChange}
           required
         />
-        <Button className="w-[78px]">Add</Button>
+        <Button className="w-full md:w-[78px]">Add</Button>
       </form>
     </>
   );

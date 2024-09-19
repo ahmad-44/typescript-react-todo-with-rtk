@@ -45,11 +45,11 @@ const Todo = ({ todos }: Props) => {
       {todos.map((todo, index) => (
         <div
           key={index + 1}
-          className={`flex items-center p-[10px] ${
+          className={`flex flex-col md:flex-row md:items-center md:justify-between p-[10px] border-b border-[#DDDDDD] relative md:static ${
             index == 0 ? "rounded-t-[5px]" : ""
           } ${todos.length - 1 == index ? "rounded-b-[5px]" : ""} ${
             bgColors[todo.status]
-          }  border-b border-[#DDDDDD] `}
+          } `}
         >
           {/* USER+AVATAR Container */}
           <div className="w-[273px] flex items-center justify-start gap-3">
@@ -67,9 +67,9 @@ const Todo = ({ todos }: Props) => {
             </p>
           </div>
           {/* TASK */}
-          <p className="font-poppins w-[603px]">{todo.text}</p>
+          <p className="font-poppins w-[603px] my-5 md:my-0">{todo.text}</p>
           {/* Status */}
-          <div className="w-[150px] flex items-center justify-center">
+          <div className="w-[150px] flex items-center md:justify-center">
             <p
               className={`${
                 statusColors[todo.status]
@@ -78,13 +78,12 @@ const Todo = ({ todos }: Props) => {
               {todo.status}
             </p>
           </div>
-          {/* Action Icons */}
-          <div className="flex w-[46px] justify-between">
+          {/* Action Icons Desktop */}
+          <div className="flex w-[46px] justify-between md:static absolute top-[15px] right-[10px] md:right-0 md:top-0">
             <Actions status={todo.status} id={todo.id} />
           </div>
         </div>
       ))}
-      {/* Single Todo */}
     </>
   );
 };
