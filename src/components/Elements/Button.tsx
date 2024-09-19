@@ -1,9 +1,9 @@
 import React from "react";
 
-type Props = {
+interface Props {
   className: string;
   children: React.ReactNode;
-};
+}
 
 const Button = ({ className, children }: Props) => {
   return (

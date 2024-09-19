@@ -1,12 +1,12 @@
 import React from "react";
 
-type Props = {
+interface Props {
   className: string;
   placeholder: string;
   value: string;
   required: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-};
+}
 
 const Input = ({
   placeholder,

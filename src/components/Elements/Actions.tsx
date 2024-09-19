@@ -1,10 +1,11 @@
 import { images } from "../../constants/constants";
 import { changeTodoStatus } from "../../store/todoSlice";
 import { useDispatch } from "react-redux";
-type Props = {
+
+interface Props {
   status: string;
   id: string;
-};
+}
 
 const Actions = ({ status, id }: Props) => {
   const dispatch = useDispatch();

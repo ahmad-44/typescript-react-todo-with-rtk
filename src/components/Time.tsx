@@ -16,7 +16,7 @@ const Time: React.FC = () => {
         })
       );
 
-      // Correctly format the date as "12, Nov, 2023"
+      // Correctly format the date as "12, Nov 2023"
       const options: Intl.DateTimeFormatOptions = {
         day: "numeric",
         month: "short",

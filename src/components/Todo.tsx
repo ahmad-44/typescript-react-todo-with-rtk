@@ -1,14 +1,14 @@
 import Actions from "./Elements/Actions";
 
-type Todo = {
+interface Todo {
   id: string;
   text: string;
   username: string;
   status: "Active" | "Completed" | "Deleted";
-};
-type Props = {
+}
+interface Props {
   todos: Todo[];
-};
+}
 
 const bgColors = {
   Active: "bg-[#ffffff]",

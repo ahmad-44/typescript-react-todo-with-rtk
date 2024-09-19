@@ -1,13 +1,13 @@
-type Props = {
-  states: string[];
+interface Props {
   currentState: string;
   handleState: (param: string) => void;
-};
+}
+const filterValues = ["All", "Completed", "Active", "Deleted"];
 
-export default function Filter({ states, currentState, handleState }: Props) {
+export default function Filter({ currentState, handleState }: Props) {
   return (
     <ul className="flex items-center justify-between md:justify-center p-[5px] bg-white rounded-full w-full md:w-auto">
-      {states.map((item, i) => (
+      {filterValues.map((item, i) => (
         <li
           key={i + 1}
           className={` ${

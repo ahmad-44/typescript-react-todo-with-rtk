@@ -1,7 +1,7 @@
-import logo from "../../public/logo.png";
-import trash from "../../public/trash.png";
-import greenCheck from "../../public/greenCheck.png";
-import redCross from "../../public/redCross.png";
+import logo from "/logo.png";
+import trash from "/trash.png";
+import greenCheck from "/greenCheck.png";
+import redCross from "/redCross.png";
 
 export const images = {
   logo,

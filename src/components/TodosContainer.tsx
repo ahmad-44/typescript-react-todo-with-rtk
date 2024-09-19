@@ -1,19 +1,15 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { selectTodos } from "../store/todoSlice";
 import Todo from "./Todo";
-import { useSelector } from "react-redux";
 import Filter from "./Filter";
-
-const filterValues = ["All", "Completed", "Active", "Deleted"];
 
 function AllTodos() {
   const todos = useSelector(selectTodos);
   const [todosLength, setTodosLength] = useState(todos.length);
-  const [active, setActive] = useState("All");
+  const [active, setActive] = useState<string>("All");
   const [filteredTodos, setFilteredTodos] = useState<Todo[]>([]);
-  const handleState = (state: string) => {
-    setActive(state);
-  };
+
   useEffect(() => {
     setTodosLength(filteredTodos.length);
     setFilteredTodos(
@@ -32,16 +28,15 @@ function AllTodos() {
           All Todos ({todosLength})
         </p>
         <Filter
-          handleState={handleState}
+          handleState={(state) => setActive(state)}
           currentState={active}
-          states={filterValues}
         />
       </div>
       {/* TODOS LIST */}
       <div
-        className={`md:gap-5 border-x ${
+        className={`border-x border-[#DDDDDD] rounded-b-[5px] rounded-t-[5px] ${
           todos.length ? "border-t" : ""
-        } border-[#DDDDDD] rounded-b-[5px] rounded-t-[5px]`}
+        } `}
       >
         <Todo todos={filteredTodos} />
       </div>

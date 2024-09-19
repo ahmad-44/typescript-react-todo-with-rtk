@@ -1,20 +1,14 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import Input from "./Elements/Input";
 import Button from "./Elements/Button";
-import { useDispatch } from "react-redux";
 import { addTodo } from "../store/todoSlice";
 function AddTodos() {
   const [username, setUsername] = useState<string>("");
   const [task, setTask] = useState<string>("");
-
   const [status] = useState<"Active" | "Completed" | "Deleted">("Active");
   const dispatch = useDispatch();
-  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value);
-  };
-  const handleTaskChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTask(e.target.value);
-  };
+
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newTodo = {
@@ -36,14 +30,14 @@ function AddTodos() {
           className={"md:w-[371px] "}
           placeholder={"User Name"}
           value={username}
-          onChange={handleUsernameChange}
+          onChange={(e) => setUsername(e.target.value)}
           required
         />
         <Input
           className={"md:w-[663px]"}
           placeholder={"Task"}
           value={task}
-          onChange={handleTaskChange}
+          onChange={(e) => setTask(e.target.value)}
           required
         />
         <Button className="w-full md:w-[78px]">Add</Button>
