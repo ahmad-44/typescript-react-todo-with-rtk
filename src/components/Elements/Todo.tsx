@@ -1,0 +1,84 @@
+import Actions from "./Actions";
+
+type Props = {
+  id: string;
+  text: string;
+  username: string;
+  status: "Active" | "Completed" | "Deleted";
+  index: number;
+  todosLength: number;
+};
+
+const bgColors = {
+  Active: "bg-[#ffffff]",
+  Completed: "bg-[#F5FFF5]",
+  Deleted: "bg-[#FFEFEF]",
+};
+
+const statusColors = {
+  Active: "text-[#F2B457] bg-[#F2B457]/20",
+  Completed: "text-[#4CAF50] bg-[#4CAF50]/20",
+  Deleted: "text-[#DA4F4F] bg-[#DA4F4F]/20",
+};
+
+function getInitials(username: string): string {
+  if (username.length === 0) return "";
+  if (username.length <= 2) return username.toUpperCase();
+
+  // Split the username into parts
+  const nameParts = username.split(" ");
+
+  // If there's only one name, return the first two letters
+  if (nameParts.length === 1) return nameParts[0].substring(0, 2).toUpperCase();
+
+  // Otherwise, return the initials of the first and second names
+  const firstInitial = nameParts[0].charAt(0).toUpperCase();
+  const secondInitial = nameParts[1].charAt(0).toUpperCase();
+
+  return firstInitial + secondInitial;
+}
+
+const Todo = ({ text, username, status, id, index, todosLength }: Props) => {
+  return (
+    <>
+      {/* Single Todo */}
+      <div
+        className={`flex items-center p-[10px] ${
+          index == 0 ? "rounded-t-[5px]" : ""
+        } ${todosLength - 1 == index ? "rounded-b-[5px]" : ""} ${
+          bgColors[status]
+        }  border-b border-[#DDDDDD] `}
+      >
+        {/* USER+AVATAR Container */}
+        <div className="w-[273px] flex items-center justify-start gap-3">
+          {/* Avatar */}
+          <div
+            className={`w-[30px] h-[30px] ${
+              index % 2 == 0 ? "avatar-gradient-1" : "avatar-gradient-2"
+            }  rounded-full flex items-center justify-center text-[10px] text-white font-semibold`}
+          >
+            {getInitials(username)}
+          </div>
+          {/* User Name */}
+          <p className="font-poppins text-base text-[#666666]">{username}</p>
+        </div>
+        {/* TASK */}
+        <p className="font-poppins w-[603px]">{text}</p>
+        {/* Status */}
+        <div className="w-[150px] flex items-center justify-center">
+          <p
+            className={`${statusColors[status]} py-[5px] px-5 rounded-full inline font-poppins text-xs`}
+          >
+            {status}
+          </p>
+        </div>
+        {/* Action Icons */}
+        <div className="flex w-[46px] justify-between">
+          <Actions status={status} id={id} />
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Todo;
