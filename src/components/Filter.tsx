@@ -17,7 +17,7 @@ export default function Filter({ activeFilter, setActiveFilter }: Props) {
             item == activeFilter
               ? "bg-customBlue text-white transition duration-300 hover:hover:bg-customBlue/85"
               : ""
-          }  text-xs font-poppins py-[5px] px-2 md:px-5 my-[5px] flex items-center rounded-full cursor-pointer hover:bg-customBlue hover:text-white transition duration-300`}
+          }  text-xs font-poppins py-[5px] px-2 md:px-5 flex items-center rounded-full cursor-pointer hover:bg-customBlue hover:text-white transition duration-300`}
           onClick={() => setActiveFilter(item)}
         >
           {item !== "Active" ? item : "Incompleted"}
