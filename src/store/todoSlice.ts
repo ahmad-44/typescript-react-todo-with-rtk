@@ -1,28 +1,17 @@
 import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
-
-interface Todo {
-  id: string;
-  text: string;
-  username: string;
-  status: "Active" | "Completed" | "Deleted";
-}
+import { IBaseTodo, ITodo } from "../components/Todo";
+import { TStatus } from "../components/Elements/Actions";
 
 interface InitialState {
-  todos: Todo[];
+  todos: ITodo[];
 }
 const initialState: InitialState = {
   todos: [],
 };
 
-interface AddTodoPayload {
-  text: string;
-  username: string;
-  status: "Active" | "Completed" | "Deleted";
-}
-
 interface ChangeTodoStatusPayload {
   id: string; // The ID of the todo item
-  status: "Active" | "Completed" | "Deleted"; // The new state
+  status: TStatus; // The new state
 }
 //example data
 // initialState.todos.push({
@@ -36,12 +25,14 @@ export const todoSlice = createSlice({
   name: "todo",
   initialState,
   reducers: {
-    addTodo: (state, action: PayloadAction<AddTodoPayload>) => {
-      if (action.payload.text == "") return;
-      const todo: Todo = {
-        id: nanoid(),
+    addTodo: (state, action: PayloadAction<IBaseTodo>) => {
+      if (!action.payload.text) return;
+
+      const todo: ITodo = {
         ...action.payload,
+        id: nanoid(),
       };
+
       state.todos.push(todo);
     },
     // removeTodo: (state, action: PayloadAction<string>) => {
@@ -52,11 +43,12 @@ export const todoSlice = createSlice({
       action: PayloadAction<ChangeTodoStatusPayload>
     ) => {
       // find the todo where we have to make the changes
-      const todoToBeChanged: Todo | undefined = state.todos.find(
+      const todoToBeChanged = state.todos.find(
         (todo) => todo.id === action.payload.id
       );
 
-      if (todoToBeChanged == undefined) return;
+      if (!todoToBeChanged) return;
+
       todoToBeChanged.status = action.payload.status;
     },
   },

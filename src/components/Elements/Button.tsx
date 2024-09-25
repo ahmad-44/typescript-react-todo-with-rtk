@@ -22,9 +22,9 @@ const BASE_CLASSES = `outline-none h-11 rounded-md py-[10px] px-5 text-base text
 const Button = ({ variant = "PRI", ...props }: Props) => {
   return (
     <button
+      {...props}
       type={props.type || "submit"}
       className={`${BASE_CLASSES}  ${props?.className || ""}`}
-      {...props}
     >
       {props.children}
     </button>
