@@ -2,75 +2,43 @@ import { images } from "../../constants/constants";
 import { changeTodoStatus } from "../../store/todoSlice";
 import { useDispatch } from "react-redux";
 
+export type TStatus = "Deleted" | "Active" | "Completed";
+
+// export type TTodoActions = "Delete" | "Activate" | "Complete";
+
 interface Props {
-  status: string;
+  status: TStatus;
   id: string;
 }
 
+// ActionButtons | ActionsIcons
 const Actions = ({ status, id }: Props) => {
+  // if (status === "Deleted") return null; // not acceptable in react
+
   const dispatch = useDispatch();
 
-  const handleAction = (action: string) => {
-    if (action === "Delete") {
-      dispatch(
-        changeTodoStatus({
-          id,
-          status: "Deleted",
-        })
-      );
-    }
-    if (action === "Active") {
-      dispatch(
-        changeTodoStatus({
-          id,
-          status: "Active",
-        })
-      );
-    }
-    if (action === "Complete") {
-      dispatch(
-        changeTodoStatus({
-          id,
-          status: "Completed",
-        })
-      );
-    }
+  const handleAction = (status: TStatus) => {
+    dispatch(changeTodoStatus({ id, status }));
   };
 
   if (status === "Deleted") return null;
-  if (status === "Completed") {
-    return (
-      <>
-        <img
-          src={images.trash}
-          className="cursor-pointer"
-          onClick={() => handleAction("Delete")}
-        />
-        <img
-          src={images.redCross}
-          className="cursor-pointer"
-          onClick={() => handleAction("Active")}
-        />
-      </>
-    );
-  }
 
-  if (status === "Active") {
-    return (
-      <>
-        <img
-          src={images.trash}
-          className="cursor-pointer"
-          onClick={() => handleAction("Delete")}
-        />
-        <img
-          src={images.greenCheck}
-          className="cursor-pointer"
-          onClick={() => handleAction("Complete")}
-        />
-      </>
-    );
-  }
+  return (
+    <>
+      <img
+        src={images.trash}
+        className="cursor-pointer"
+        onClick={() => handleAction("Deleted")}
+      />
+      <img
+        src={images[status === "Completed" ? "redCross" : "greenCheck"]}
+        className="cursor-pointer"
+        onClick={() =>
+          handleAction(status === "Completed" ? "Active" : "Completed")
+        }
+      />
+    </>
+  );
 };
 
 export default Actions;

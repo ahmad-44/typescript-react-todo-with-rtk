@@ -1,4 +1,4 @@
-import { images, appName } from "../constants/constants";
+import { images, APP_NAME } from "../constants/constants";
 import Time from "./Time";
 
 function Header() {
@@ -9,7 +9,7 @@ function Header() {
           <img src={images.logo} alt="Logo" />
         </div>
         <p className="text-2xl md:text-3xl text-gradient font-poppins">
-          {appName}
+          {APP_NAME}
         </p>
         <Time />
       </div>
