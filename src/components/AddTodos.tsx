@@ -18,7 +18,7 @@ function AddTodos() {
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    console.log({ username });
     const _username = username.trim();
     const text = task.trim();
 
